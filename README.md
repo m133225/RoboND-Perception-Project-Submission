@@ -32,7 +32,7 @@ After the tweaking, the following RViz screenshots were taken for each of the gi
 ![world1_results](figs/world_1_recognition_screenshot.png)
 ![world2_results](figs/world_2_recognition_screenshot.png)
 ![world3_results](figs/world_3_recognition_screenshot.png)
-While the results in these screenshots seem to perform the recognition with **100% accuracy**, world 3 occasionally had the `sticky_notes` being recognised as `book` or `soap`. One way this could be resolved could simply be increasing the training data generated.
+While the results in these screenshots seem to perform the recognition with **100% accuracy**, world 3 occasionally had the `sticky_notes` being recognised as `book` or `eraser`. One way this could be resolved could simply be increasing the training data generated.
 
 After verifying that the object recognition was performing decently well, I moved on to creating the move commands and outputting them to `.yaml` files. At first I was pretty confused as to when should these commands be output in the entire perception pipeline, since the object recognition was done on every incoming topic message. But I guess overwriting the output file every time would still give me what I needed.  
 Then, first reading in the parameters in `dropbox.yaml` enabled me to determine which arm/side is meant for `green` objects and which is meant for `red` objects. While this was not a requirement, I just thought it would be better if the code still worked even if the dropboxes were swapped. Then, I read in the parameters of `pick_list_*.yaml`, and checked whether each of the items have been identified in the scene. If they have been, their commands would be appended to the command list.
