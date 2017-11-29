@@ -32,7 +32,7 @@ After the tweaking, the following RViz screenshots were taken for each of the gi
 ![world1_results](figs/world_1_recognition_screenshot.png)
 ![world2_results](figs/world_2_recognition_screenshot.png)
 ![world3_results](figs/world_3_recognition_screenshot.png)
-While the results in these screenshots seem to perform the recognition with 100% accuracy, world 3 occasionally had the `sticky_notes` being recognised as `book` or `soap`. One way this could be resolved could simply be increasing the training data generated.
+While the results in these screenshots seem to perform the recognition with **100% accuracy**, world 3 occasionally had the `sticky_notes` being recognised as `book` or `soap`. One way this could be resolved could simply be increasing the training data generated.
 
 After verifying that the object recognition was performing decently well, I moved on to creating the move commands and outputting them to `.yaml` files. At first I was pretty confused as to when should these commands be output in the entire perception pipeline, since the object recognition was done on every incoming topic message. But I guess overwriting the output file every time would still give me what I needed.  
 Then, first reading in the parameters in `dropbox.yaml` enabled me to determine which arm/side is meant for `green` objects and which is meant for `red` objects. While this was not a requirement, I just thought it would be better if the code still worked even if the dropboxes were swapped. Then, I read in the parameters of `pick_list_*.yaml`, and checked whether each of the items have been identified in the scene. If they have been, their commands would be appended to the command list.
@@ -42,7 +42,7 @@ Of course, it never ends here!!
 I attempted to implement the full pipeline of picking and placing the objects, although I am pretty unsure how to complete this without making significant changes to the code.
 
 Two different pipelines were explored:
-- First was the straightforward way of calling the mover service for *each* of the pick list objects after finishing object recognition. This meant that the perception would only be re-processed after the moving commands have all been completed. While this seemed to position the arm correctly in some of my trials, it seems to only occasionally grab hold the target object. Not sure if this was due to the motion planning detecting a collision and thus releasing the grip.
+- First was the straightforward way of calling the mover service for *each* of the pick list objects after finishing object recognition. This meant that the perception would only be re-processed after the moving commands have all been completed. While this seemed to position the arm correctly in some of my trials, it seems to only occasionally grab hold the target object. Not sure if this was due to the motion planning detecting a collision and thus releasing the grip, although it does occasionally give errors of `GOAL_TOLERANCE_VIOLATED`.
 While this would probably work out for this project, any scene changes in the motion duration would break the pipeline.
 - The second way that was explored was to publish the detected object list in the `pcl_callback` function, then creating a separate subscriber to subscribe to this detected object list. While this enabled a more dynamic recognition, when the arm of the robot came into vision, it was detected as a separate object. The main cause of concern with this way is that the table and clusters information are lost since they are not published together with the list. Then, how should the collision be computed?
 
@@ -51,4 +51,4 @@ While this would probably work out for this project, any scene changes in the mo
     - To concatenate these point clouds, do I have to convert them into lists, concatenate the lists, then convert them back to point clouds?
 2. How do I rotate the robot without executing further code, since rotation command is sent using a pub-sub architecture? Do I simply use `rospy.sleep(rospy.Duration(10))`?
 
-Will continue to work on these issues if I have the chance in the near future.
+Will continue to work on these issues if I have the chance in the near future!
