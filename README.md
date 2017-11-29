@@ -20,7 +20,7 @@ Training the SVM on this training set, and then testing it resulted in exactly 8
 ![training_results](figs/figure_world_all_training.png)
 ![training_results_normalized](figs/figure_world_all_training_normalized.png)
 
-Initially, I trained a model for each of the given worlds (i.e. world1's model only contained 3 categories, world2's model contained 6 categories and world3's model contained all 8 categories). While this had better results for the individual worlds (since there are less false positives), I found that the use of a model with all categories worked decently well and used this simpler version for the submission. :p
+Initially, I trained a model for each of the given worlds (i.e. world1's model only contained 3 categories, world2's model contained 5 categories and world3's model contained all 8 categories). While this had better results for the individual worlds (since there are less false positives), I found that the use of a model with all categories worked decently well and used this simpler version for the submission. :p
 
 ### Pick and Place Setup
 
